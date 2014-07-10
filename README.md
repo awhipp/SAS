@@ -1,4 +1,4 @@
-SAS - South American Samurai
+Snack Attack. Code named Sassy Watermelon.
 ===
-
-A test site for documentation of projects. Feel free to browse. Don't expect to be entertained.
+Feel free to browse. Don't expect to be entertained.
+A Site to demonstrate my pitch for improved employee engagement strategies.
