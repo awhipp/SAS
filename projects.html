@@ -10,10 +10,10 @@
   <body>
     
     <!--SAME FOR ALL PAGES : HEADER -->
-    <div class="row">
-    	<h2>About Alexander</h2>
+    <div class="row" style="font:16px/26px Georgia, Garamond, Serif;">        
+    	<p align="center"><i><font size="+3">Alexander.</font></i></p>
     </div>
-
+    
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
@@ -70,9 +70,14 @@
                 <u>First Task:</u> Implement a "map quest" program with three parts. First, a data dictionary which was composed using java.util.treemap. Second, I created a spatial map by implementing our own derivation of a polygonal region (PR) quadtree. The final part was an adjacency list of the data objects to determine weights. The program had an input of an XML document, and was parsed accordingly, calling commands and creating the map. The three parts were used in conjunction together.<br><br>
                 <u>Second Task:</u> Using the code you already had constructed I reworked each structure to implement new data structures I had learned in class. In this sense I replaced the treemap with our own AVL tree, this AVL tree had a variable passed in which determined how many levels were needed to be offbalance before a rotation would occur (the standard AVL tree has the balance factor of 1). Next, I changed the PR Quadtree to a polygonal map (PM) quadtree. Finally the adjacency list included a derivation of Dijkstra's to determine shortest path.<br><br>
                 <u>Final Task:</u> The implementations for PM1 and PM3 were done (each has a different level of restrictions on what is considered valid). Originally it was just a PM3. Now, to get a sense of what went behind the framework for the TreeMap class, we had to have our AVL tree implement the SortedMap interface which enabled us to compare between a treemap and our AVL tree. This allowed us to call such functions such as avl.entryset(), avl.keyset(), avl.values() and compare them to the corresponding treemap methods.
-              </p>
+             </p>
           </ul>
        </ul>
     </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
   </body>
 </html>
