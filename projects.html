@@ -1,0 +1,78 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resumé | Whipp</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+    
+    <!--SAME FOR ALL PAGES : HEADER -->
+    <div class="row">
+    	<h2>About Alexander</h2>
+    </div>
+
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a>Navigation: </a></h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-dropdown active">
+            <a>Social Media</a>
+            <ul class="dropdown">
+              <li><a href="http://lnkd.in/Fm9BCV">LinkedIn</a></li>
+              <li><a href="http://instagram.com/whippmyhurr">Instagram</a></li>
+              <li><a href="http://www.reddit.com/user/deevu/">Reddit</a></li>
+              <li><a href="http://steamcommunity.com/id/dejavuman">Steam</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="right">
+          <li><a href="contact_me.html">Contact Me</a></li>
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+        <ul class="left">
+          <li><a href="resume.html">Resumé</a></li>
+        </ul>
+        <ul class="left">
+        	<li><a href="projects.html">Projects</a></li>
+        </ul>
+      </section>
+    </nav>
+	<!-- END OF HEADER -->
+        
+    <div style="height:80%;width:100%;border:0px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+    	<ul>
+          <ul>
+          	<br><br>
+            <li><b>Public Service Campaign - "Foneless Phood: Disconnect to Reconnect"</b></li>
+              <p>
+                <i>January 2014 to May 2014</i> <br><br>
+                This was a semester long project which consisted of a team of four. My team was given the task to research and conduct an experiment revolving around annoying cellphone use in social environments (ie: at the dinner table). Our goal was to positively change the behavior to lead to a reduction in the intention for cell phone use. After the creation of an experimental PSA video, we conducted a 200-person experiment with a control PSA. The results were brought together, and analyzed and later presented to a board of professors in the Psychology Department (including the director and assistant directors). The data we gathered was questioned, and we had to support our venture. For more information on the topic, results, or presentation send me a message.
+              </p>
+            <li><b>Meesh Quest (A MapQuest Derivative)</b></li>
+              <p>
+                <i>August 2013 to Decemeber 2013</i><br><br>
+                To encompass my data structures course I was given a semester-long, three-part project:<br><br>
+                <u>First Task:</u> Implement a "map quest" program with three parts. First, a data dictionary which was composed using java.util.treemap. Second, I created a spatial map by implementing our own derivation of a polygonal region (PR) quadtree. The final part was an adjacency list of the data objects to determine weights. The program had an input of an XML document, and was parsed accordingly, calling commands and creating the map. The three parts were used in conjunction together.<br><br>
+                <u>Second Task:</u> Using the code you already had constructed I reworked each structure to implement new data structures I had learned in class. In this sense I replaced the treemap with our own AVL tree, this AVL tree had a variable passed in which determined how many levels were needed to be offbalance before a rotation would occur (the standard AVL tree has the balance factor of 1). Next, I changed the PR Quadtree to a polygonal map (PM) quadtree. Finally the adjacency list included a derivation of Dijkstra's to determine shortest path.<br><br>
+                <u>Final Task:</u> The implementations for PM1 and PM3 were done (each has a different level of restrictions on what is considered valid). Originally it was just a PM3. Now, to get a sense of what went behind the framework for the TreeMap class, we had to have our AVL tree implement the SortedMap interface which enabled us to compare between a treemap and our AVL tree. This allowed us to call such functions such as avl.entryset(), avl.keyset(), avl.values() and compare them to the corresponding treemap methods.
+              </p>
+          </ul>
+       </ul>
+    </div>
+  </body>
+</html>
