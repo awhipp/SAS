@@ -2917,10 +2917,11 @@ blockquote p {
       font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
       font-size: 1rem; }
       .tabs dd > a:hover, .tabs .tab-title > a:hover {
-        background: #e1e1e1; }
+        background: #919999; 
+		color : #FFFFFF; }
     .tabs dd.active a, .tabs .tab-title.active a {
-      background: white;
-      color: #222222; }
+      background: #008caa;
+      color: #FFFFFF; }
   .tabs.radius dd:first-child a, .tabs.radius .tab:first-child a {
     border-bottom-left-radius: 3px;
     border-top-left-radius: 3px; }
