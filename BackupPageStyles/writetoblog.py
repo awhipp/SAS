@@ -19,7 +19,7 @@ for line in content:
 		title = 0
 		for message in post:
 			if title == 0:
-				content.insert(countLine, '<h4>' + message + ' - ' + date + '</h4>\n')
+				content.insert(countLine, '<h5>' + message + ' - ' + date + '</h5>\n')
 				countLine += 1
 				title = 1
 				continue
