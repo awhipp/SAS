@@ -1,3 +1,0 @@
-First Message
-Hey all, this message serves to be a test for future posts. I am basically testing a python script which will upload my posts. 
-Really interested to see that this worked.
