@@ -7,12 +7,13 @@ var canvas = document.getElementById('stage'),
 	badGuesses,
 	correctGuesses,
 	beginning_index,
-	ending_index;
+	ending_index,
+	start_time, timerID, timer;
 
 function init() {
 	var helptext = $('#helptext'),
 		w = screen.availWidth <= 800 ? screen.availWidth : 800;
-	
+	timer = 30;
 	// Hide the loading message and display the control buttons
 	$('#loading').hide();
 	$('#play').css('display', 'inline-block').click(newGame);
@@ -69,6 +70,7 @@ function newGame() {
 	correctGuesses = 0;
 	wordToGuess = getWord();
 	wordLength = wordToGuess[1].length;
+	start_time=new Date();
 	// create row of underscores the same length as letters to guess
 	for (var i = 0; i < wordLength; i++) {
 		placeholders += '_';
@@ -86,8 +88,18 @@ function newGame() {
 		frag.appendChild(div);
 	}
 	letters.appendChild(frag);
+	timerID = setInterval( "drawCanvas()", 1000 );
+}
+
+function stopTimerLose() {
+	var c = canvas.getContext('2d');
+	canvas.width = canvas.width;
+	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+	c.fillStyle = 'red';
+	c.fillText("Time has run out.",10,220);
 	drawCanvas();
 }
+
 
 // Get selected letter and remove it from the alphabet pad
 function getLetter() {
@@ -134,11 +146,18 @@ function drawCanvas() {
 	canvas.width = canvas.width;
 	c.lineWidth = 10;
 	c.strokeStyle = 'green';
-	c.font = 'bold 24px Optimer, Arial, Helvetica, sans-serif';
+	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 	c.fillStyle = 'red';
 	// draw the ground
 	drawLine(c, [20,190], [180,190]);
 	// start building the gallows if there's been a bad guess
+	remaining = timer-parseInt(((new Date()-start_time))/1000);
+	if(remaining <= 0){
+		clearInterval( timerID );
+		badGuesses = 8;
+	}else{
+		c.fillText("Time Remaining: " + remaining.toString(),10,220);
+	}
 	if (badGuesses > 0) {
 		// create the upright
 		c.strokeStyle = '#A52A2A';
@@ -178,7 +197,7 @@ function drawCanvas() {
 		if (badGuesses > 7) {
 			// draw right leg and end game
 			drawLine(c, [145,130], [160,170]);
-			c.fillText('Game over', 45, 110);
+			c.fillText('Game over', 45, 220);
 			// remove the alphabet pad
 			letters.innerHTML = '';
 			// display the correct answer
@@ -186,19 +205,18 @@ function drawCanvas() {
 			setTimeout(showResult, 200);
 			// increase score of lost games
 			localStorage.setItem('hangmanLose', 1 + parseInt(localStorage.getItem('hangmanLose')));
-			// display the score after two seconds
-			setTimeout(showScore, 2000);
 		}
+		
 	}
 	// if the word has been guessed correctly, display message,
 	// update score of games won, and then show score after 2 seconds
 	if (correctGuesses == wordLength) {
 		letters.innerHTML = '';
-		c.fillText('You won!', 45,110);
+		clearInterval( timerID );
+		c.fillText('You won!', 55, 110);
         // increase score of won games
         // display score
 		localStorage.setItem('hangmanWin', 1 + parseInt(localStorage.getItem('hangmanWin')));
-		setTimeout(showScore, 2000);
 	}
 }
 
