@@ -230,75 +230,9 @@ function drawCanvas() {
 		} else {
 			c.fillText("Time Remaining: " + remaining.toString(), 10, 15);
 
+			MyQVO(badGuesses);
 
-			if (badGuesses == 0) {
-				c.drawImage(combined, image_x, image_y);
-			}
 
-			if (badGuesses == 1) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-				c.drawImage(Q1, image_x, image_y);
-				c.drawImage(Q2, image_x, image_y);
-				c.drawImage(V1, image_x, image_y);
-				c.drawImage(V2, image_x, image_y);
-				c.drawImage(O1, image_x, image_y);
-			}
-
-			if (badGuesses == 2) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-				c.drawImage(Q1, image_x, image_y);
-				c.drawImage(Q2, image_x, image_y);
-				c.drawImage(V1, image_x, image_y);
-				c.drawImage(V2, image_x, image_y);
-			}
-
-			if (badGuesses == 3) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-				c.drawImage(Q1, image_x, image_y);
-				c.drawImage(Q2, image_x, image_y);
-				c.drawImage(V1, image_x, image_y);
-			}
-
-			if (badGuesses == 4) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-				c.drawImage(Q1, image_x, image_y);
-				c.drawImage(Q2, image_x, image_y);
-			}
-
-			if (badGuesses == 5) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-				c.drawImage(Q1, image_x, image_y);
-			}
-
-			if (badGuesses == 6) {
-				c.drawImage(M, image_x, image_y);
-				c.drawImage(Y, image_x, image_y);
-			}
-
-			if (badGuesses == 7) {
-				c.drawImage(M, image_x, image_y);
-			}
-
-			if (badGuesses > 7) {
-				canvas.width = canvas.width;
-				c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
-				c.fillStyle = 'red';
-				c.fillText('Ran out of Guesses', 10, 110);
-				// remove the alphabet pad
-				letters.innerHTML = '';
-				// display the correct answer
-				// need to use setTimeout to prevent race condition
-				setTimeout(showResult, 200);
-				clearInterval(timerID);
-				timerID = false;
-				// increase score of lost games
-				losses = losses + 1;
-			}
 		}
 
 		// if the word has been guessed correctly, display message,
@@ -345,6 +279,8 @@ function showResult() {
 		counter ++;
 	}
 	word.innerHTML = placeholders.join('');
+	$('#play').css('display', 'inline-block').show().click(difficulty);
+	$('#end_game').css('display', 'inline-block').hide();
 }
 
 // Reset stored scores to zero
@@ -353,9 +289,6 @@ function endGame() {
 	timerID = false;
 	$('#play').css('display', 'inline-block').show().click(difficulty);
 	$('#end_game').css('display', 'inline-block').hide();
-	$('#help').css('display','inline-block').click(function(e) {
-		helptext.show().css('margin-left', (w-400)/2 + 'px');
-	});
 	showScore();
 }
 
@@ -365,4 +298,84 @@ function getWord() {
   var sentences = ['This is for _','_ made this', 'Play _ Win','_'];
   var index = parseInt(Math.random()* blanks.length);
   return [sentences[index],blanks[index]];
+}
+
+function MyQVO(badGuesses){
+	var c = canvas.getContext('2d');
+
+	if (badGuesses == 0) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+		c.drawImage(Q2, image_x, image_y);
+		c.drawImage(V1, image_x, image_y);
+		c.drawImage(V2, image_x, image_y);
+		c.drawImage(O1, image_x, image_y);
+		c.drawImage(O2, image_x, image_y);
+	}
+
+	if (badGuesses == 1) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+		c.drawImage(Q2, image_x, image_y);
+		c.drawImage(V1, image_x, image_y);
+		c.drawImage(V2, image_x, image_y);
+		c.drawImage(O1, image_x, image_y);
+	}
+
+	if (badGuesses == 2) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+		c.drawImage(Q2, image_x, image_y);
+		c.drawImage(V1, image_x, image_y);
+		c.drawImage(V2, image_x, image_y);
+	}
+
+	if (badGuesses == 3) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+		c.drawImage(Q2, image_x, image_y);
+		c.drawImage(V1, image_x, image_y);
+	}
+
+	if (badGuesses == 4) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+		c.drawImage(Q2, image_x, image_y);
+	}
+
+	if (badGuesses == 5) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+		c.drawImage(Q1, image_x, image_y);
+	}
+
+	if (badGuesses == 6) {
+		c.drawImage(M, image_x, image_y);
+		c.drawImage(Y, image_x, image_y);
+	}
+
+	if (badGuesses == 7) {
+		c.drawImage(M, image_x, image_y);
+	}
+
+	if (badGuesses > 7) {
+		canvas.width = canvas.width;
+		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+		c.fillStyle = 'red';
+		c.fillText('Ran out of Guesses', 10, 110);
+		// remove the alphabet pad
+		letters.innerHTML = '';
+		// display the correct answer
+		// need to use setTimeout to prevent race condition
+		setTimeout(showResult, 200);
+		clearInterval(timerID);
+		timerID = false;
+		// increase score of lost games
+		losses = losses + 1;
+	}
 }
