@@ -8,8 +8,8 @@ body {
 }
 h1 {
 	text-align: center;
-	font-family: Tahoma, Geneva, sans-serif;
-	color:#096;
+	font-family: script;
+	color:#0077CC;
 }
 .js #help {
     width: 40px;
@@ -68,9 +68,9 @@ h1 {
 	color: #f00;
 	text-align: center;
 }
-#play, #clear {
+#play, #end_game {
 	display: none;
-	width: 140px;
+	width: 120px;
 	padding: 0.25em 0;
 	text-align: center;
 	margin: 0.2em 0 0 13px;

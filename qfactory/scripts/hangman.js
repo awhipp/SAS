@@ -8,16 +8,37 @@ var canvas = document.getElementById('stage'),
 	correctGuesses,
 	beginning_index,
 	ending_index,
-	start_time, timerID, timer;
+	start_time, timerID, timer, wins, losses;
 
+var combined, M, Y, Q1, Q2, V1, V2, O1, O2;
 function init() {
+	
+	combined = new Image();
+	combined.src = 'images/myqvo_combined.png';
+	M = new Image();
+	M.src = 'images/M.png';
+	Y = new Image();
+	Y.src = 'images/Y.png';
+	Q1 = new Image();
+	Q1.src = 'images/Q1.png';
+	Q2 = new Image();
+	Q2.src = 'images/Q2.png';
+	V1 = new Image();
+	V1.src = 'images/V1.png';
+	V2 = new Image();
+	V2.src = 'images/V2.png';
+	O1 = new Image();
+	O1.src = 'images/O1.png';
+	O2 = new Image();
+	O2.src = 'images/O2.png';
+	
 	var helptext = $('#helptext'),
 		w = screen.availWidth <= 800 ? screen.availWidth : 800;
 	timer = 30;
 	// Hide the loading message and display the control buttons
 	$('#loading').hide();
 	$('#play').css('display', 'inline-block').click(newGame);
-	$('#clear').css('display', 'inline-block').click(resetScore);
+	$('#end_game').css('display', 'inline-block').click(endGame);
 	$('#help').click(function(e) {
 		$('body').append('<div id="mask"></div>');
         helptext.show().css('margin-left', (w-300)/2 + 'px');
@@ -32,19 +53,15 @@ function init() {
 		canvas.getContext('2d').scale(1.5, 1.5);
 	}
 // Initialize the scores and store locally if not already stored
-	if (localStorage.getItem('hangmanWin') == null) {
-		localStorage.setItem('hangmanWin', '0');
-	} 
-	if (localStorage.getItem('hangmanLose') == null) {
-		localStorage.setItem('hangmanLose', '0');
-	}
+	wins = 0;
+	losses = 0;
 	showScore();
 }
 
 // Display the score in the canvas
 function showScore() {
-	var won = localStorage.getItem('hangmanWin'),
-	    lost = localStorage.getItem('hangmanLose'),
+	var won = wins,
+	    lost = losses,
 		c = canvas.getContext('2d');
 	// clear the canvas
 	canvas.width = canvas.width;
@@ -91,16 +108,6 @@ function newGame() {
 	timerID = setInterval( "drawCanvas()", 1000 );
 }
 
-function stopTimerLose() {
-	var c = canvas.getContext('2d');
-	canvas.width = canvas.width;
-	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
-	c.fillStyle = 'red';
-	c.fillText("Time has run out.",10,220);
-	drawCanvas();
-}
-
-
 // Get selected letter and remove it from the alphabet pad
 function getLetter() {
 	checkLetter(this.innerHTML);
@@ -144,79 +151,121 @@ function drawCanvas() {
 	var c = canvas.getContext('2d');
 	// reset the canvas and set basic styles
 	canvas.width = canvas.width;
-	c.lineWidth = 10;
-	c.strokeStyle = 'green';
+	
+	
 	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 	c.fillStyle = 'red';
-	// draw the ground
-	drawLine(c, [20,190], [180,190]);
-	// start building the gallows if there's been a bad guess
 	remaining = timer-parseInt(((new Date()-start_time))/1000);
 	if(remaining <= 0){
 		clearInterval( timerID );
-		badGuesses = 8;
+		canvas.width = canvas.width;	
+		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+		c.fillStyle = 'red';
+		c.fillText("Time is Up!",35,110);
+		
+		// remove the alphabet pad
+		letters.innerHTML = '';
+		// display the correct answer
+		// need to use setTimeout to prevent race condition
+		setTimeout(showResult, 200);
+		clearInterval( timerID );
+
+		// increase score of lost games
+		losses = losses + 1;
 	}else{
 		c.fillText("Time Remaining: " + remaining.toString(),10,220);
-	}
-	if (badGuesses > 0) {
-		// create the upright
-		c.strokeStyle = '#A52A2A';
-		drawLine(c, [30,185], [30,10]);
-		if (badGuesses > 1) {
-			// create the arm of the gallows
-			c.lineTo(150,10);
-			c.stroke();
+	
+	
+		if( badGuesses == 0 ){
+			c.drawImage(combined,5,0);
 		}
-		if (badGuesses > 2) {
-			c.strokeStyle = 'black';
-			c.lineWidth = 3;
-			// draw rope
-			drawLine(c, [145,15], [145,30]);
-			// draw head
-			c.beginPath();
-			c.moveTo(160, 45);
-			c.arc(145, 45, 15, 0, (Math.PI/180)*360);
-			c.stroke(); 
+		
+		if( badGuesses == 1 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+			c.drawImage(Q1,5,0);
+			c.drawImage(Q2,5,0);
+			c.drawImage(V1,5,0);
+			c.drawImage(V2,5,0);
+			c.drawImage(O1,5,0);
 		}
-		if (badGuesses > 3) {
-			// draw body
-			drawLine(c, [145,60], [145,130]);
+		
+		if( badGuesses == 2 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+			c.drawImage(Q1,5,0);
+			c.drawImage(Q2,5,0);
+			c.drawImage(V1,5,0);
+			c.drawImage(V2,5,0);
 		}
-		if (badGuesses > 4) {
-			// draw left arm
-			drawLine(c, [145,80], [110,90]);
+		
+		if( badGuesses == 3 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+			c.drawImage(Q1,5,0);
+			c.drawImage(Q2,5,0);
+			c.drawImage(V1,5,0);
 		}
-		if (badGuesses > 5) {
-			// draw right arm
-			drawLine(c, [145,80], [180,90]);
+		
+		if( badGuesses == 4 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+			c.drawImage(Q1,5,0);
+			c.drawImage(Q2,5,0);
 		}
-		if (badGuesses > 6) {
-			// draw left leg
-			drawLine(c, [145,130], [130,170]);
+		
+		if( badGuesses == 5 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+			c.drawImage(Q1,5,0);
 		}
-		if (badGuesses > 7) {
-			// draw right leg and end game
-			drawLine(c, [145,130], [160,170]);
-			c.fillText('Game over', 45, 220);
+		
+		if( badGuesses == 6 ){
+			c.drawImage(M,5,0);
+			c.drawImage(Y,5,0);
+		}
+		
+		if( badGuesses == 7 ){
+			c.drawImage(M,5,0);
+		}
+		
+		if( badGuesses > 7 ){
+			canvas.width = canvas.width;	
+			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+			c.fillStyle = 'red';
+			c.fillText('Ran out of Guesses', 10, 110);
 			// remove the alphabet pad
 			letters.innerHTML = '';
 			// display the correct answer
 			// need to use setTimeout to prevent race condition
 			setTimeout(showResult, 200);
+			clearInterval( timerID );
+	
 			// increase score of lost games
-			localStorage.setItem('hangmanLose', 1 + parseInt(localStorage.getItem('hangmanLose')));
+			losses = losses + 1;
 		}
-		
 	}
+	
 	// if the word has been guessed correctly, display message,
 	// update score of games won, and then show score after 2 seconds
 	if (correctGuesses == wordLength) {
 		letters.innerHTML = '';
 		clearInterval( timerID );
-		c.fillText('You won!', 55, 110);
+		canvas.width = canvas.width;
+		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+		c.fillStyle = 'red';
+		c.drawImage(M,5,0);
+		c.drawImage(Y,5,0);
+		c.drawImage(Q1,5,0);
+		c.drawImage(Q2,5,0);
+		c.drawImage(V1,5,0);
+		c.drawImage(V2,5,0);
+		c.drawImage(O1,5,0);
+		c.drawImage(O2,5,0);
+		c.fillText('You Won!', 65, 220);
         // increase score of won games
         // display score
-		localStorage.setItem('hangmanWin', 1 + parseInt(localStorage.getItem('hangmanWin')));
+		wins = wins + 1;
 	}
 }
 
@@ -231,25 +280,28 @@ function drawLine(context, from, to) {
 function showResult() {
 	var placeholders = word.innerHTML;
     placeholders = placeholders.split('');
-	for (i = 0; i < wordLength; i++) {
+	var counter = 0;
+	for (i = beginning_index; i < ending_index+1; i++) {
 		if (placeholders[i] == '_') {
-			placeholders[i] = '<span style="color:red">' + wordToGuess[1].charAt(i).toUpperCase() + '</span>';
+			placeholders[i] = '<span style="color:red">' + wordToGuess[1].charAt(counter).toUpperCase() + '</span>';
 		}
+		counter ++;
 	}
 	word.innerHTML = placeholders.join('');
 }
 
 // Reset stored scores to zero
-function resetScore() {
-	localStorage.setItem('hangmanWin', '0');
-	localStorage.setItem('hangmanLose', '0');
+function endGame() {
+	if(timerID != null){
+		clearInterval( timerID );
+	}
 	showScore();
 }
 
 // Select random word to guess
 function getWord() {
-  var blanks = new Array('myqvo','alex','to','gerald');
-  var sentences = new Array('This is for _','_ made this', 'Play _ Win','_');
+ var blanks = new Array('myqvo','alex','to','gerald');
+  var sentences = new Array('This is for _','_ made this', 'Play _ Win','_');  
   var index = parseInt(Math.random()* blanks.length);
   return new Array(sentences[index],blanks[index]);
 }
