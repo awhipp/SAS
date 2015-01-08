@@ -12,7 +12,7 @@ var canvas = document.getElementById('stage'),
 
 var combined, M, Y, Q1, Q2, V1, V2, O1, O2;
 function init() {
-	
+
 	combined = new Image();
 	combined.src = 'images/myqvo_combined.png';
 	M = new Image();
@@ -31,23 +31,25 @@ function init() {
 	O1.src = 'images/O1.png';
 	O2 = new Image();
 	O2.src = 'images/O2.png';
-	
+
 	var helptext = $('#helptext'),
 		w = screen.availWidth <= 800 ? screen.availWidth : 800;
-	timer = 30;
 	// Hide the loading message and display the control buttons
 	$('#loading').hide();
-	$('#play').css('display', 'inline-block').click(newGame);
-	$('#end_game').css('display', 'inline-block').click(endGame);
-	$('#help').click(function(e) {
-		$('body').append('<div id="mask"></div>');
-        helptext.show().css('margin-left', (w-300)/2 + 'px');
+	$('#play').css('display', 'inline-block').click(difficulty);
+	$('#end_game').hide();
+	$('#beginner').hide();
+	$('#intermediate').hide();
+	$('difficult').hide();
+	$('expert').hide();
+	$('#help').css('display','inline-block').click(function(e) {
+        helptext.show().css('margin-left', (w-400)/2 + 'px');
     });
 	$('#close').click(function(e) {
 		$('#mask').remove();
         helptext.hide();
     });
-	
+
 	// Rescale the canvas if the screen is wider than 700px
 	if (screen.innerWidth >= 700) {
 		canvas.getContext('2d').scale(1.5, 1.5);
@@ -58,8 +60,47 @@ function init() {
 	showScore();
 }
 
+function difficulty(){
+	$('#play').hide();
+	$('#help').hide();
+	$('#beginner').css('display','inline-block').show().click(function(e) {
+		timer = 26;
+		$('#beginner').hide();
+		$('#intermediate').hide();
+		$('#difficult').hide();
+		$('#expert').hide();
+		newGame();
+	});
+	$('#intermediate').css('display','inline-block').show().click(function(e) {
+		timer = 21;
+		$('#beginner').hide();
+		$('#intermediate').hide();
+		$('#difficult').hide();
+		$('#expert').hide();
+		newGame();
+	});
+	$('#difficult').css('display','inline-block').show().click(function(e) {
+		timer = 16;
+		$('#beginner').hide();
+		$('#intermediate').hide();
+		$('#difficult').hide();
+		$('#expert').hide();
+		newGame();
+	});
+	$('#expert').css('display','inline-block').show().click(function(e) {
+		timer = 11;
+		$('#beginner').hide();
+		$('#intermediate').hide();
+		$('#difficult').hide();
+		$('#expert').hide();
+		newGame();
+	});
+}
+
 // Display the score in the canvas
 function showScore() {
+	clearInterval(timerID);
+	timerID = false;
 	var won = wins,
 	    lost = losses,
 		c = canvas.getContext('2d');
@@ -80,6 +121,12 @@ function showScore() {
 
 // Start new game
 function newGame() {
+	$('#play').css('display', 'inline-block').hide();
+	$('#beginner').hide();
+	$('#intermediate').hide();
+	$('#difficult').hide();
+	$('#expert').hide();
+	$('#end_game').css('display', 'inline-block').show().click(endGame);
 	var placeholders = '',
 		frag = document.createDocumentFragment(),
 		abc = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -105,7 +152,8 @@ function newGame() {
 		frag.appendChild(div);
 	}
 	letters.appendChild(frag);
-	timerID = setInterval( "drawCanvas()", 1000 );
+	timerID = setInterval("drawCanvas()", 1000);
+
 }
 
 // Get selected letter and remove it from the alphabet pad
@@ -148,124 +196,129 @@ function checkLetter(letter) {
 
 // Draw the canvas
 function drawCanvas() {
-	var c = canvas.getContext('2d');
-	// reset the canvas and set basic styles
-	canvas.width = canvas.width;
-	
-	
-	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
-	c.fillStyle = 'red';
-	remaining = timer-parseInt(((new Date()-start_time))/1000);
-	if(remaining <= 0){
-		clearInterval( timerID );
-		canvas.width = canvas.width;	
+	if(timerID) {
+		var c = canvas.getContext('2d');
+		// reset the canvas and set basic styles
+		canvas.width = canvas.width;
+
+
 		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 		c.fillStyle = 'red';
-		c.fillText("Time is Up!",35,110);
-		
-		// remove the alphabet pad
-		letters.innerHTML = '';
-		// display the correct answer
-		// need to use setTimeout to prevent race condition
-		setTimeout(showResult, 200);
-		clearInterval( timerID );
-
-		// increase score of lost games
-		losses = losses + 1;
-	}else{
-		c.fillText("Time Remaining: " + remaining.toString(),10,220);
-	
-	
-		if( badGuesses == 0 ){
-			c.drawImage(combined,5,0);
-		}
-		
-		if( badGuesses == 1 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-			c.drawImage(Q1,5,0);
-			c.drawImage(Q2,5,0);
-			c.drawImage(V1,5,0);
-			c.drawImage(V2,5,0);
-			c.drawImage(O1,5,0);
-		}
-		
-		if( badGuesses == 2 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-			c.drawImage(Q1,5,0);
-			c.drawImage(Q2,5,0);
-			c.drawImage(V1,5,0);
-			c.drawImage(V2,5,0);
-		}
-		
-		if( badGuesses == 3 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-			c.drawImage(Q1,5,0);
-			c.drawImage(Q2,5,0);
-			c.drawImage(V1,5,0);
-		}
-		
-		if( badGuesses == 4 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-			c.drawImage(Q1,5,0);
-			c.drawImage(Q2,5,0);
-		}
-		
-		if( badGuesses == 5 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-			c.drawImage(Q1,5,0);
-		}
-		
-		if( badGuesses == 6 ){
-			c.drawImage(M,5,0);
-			c.drawImage(Y,5,0);
-		}
-		
-		if( badGuesses == 7 ){
-			c.drawImage(M,5,0);
-		}
-		
-		if( badGuesses > 7 ){
-			canvas.width = canvas.width;	
+		remaining = timer - parseInt(((new Date() - start_time)) / 1000);
+		if (remaining <= 0) {
+			clearInterval(timerID);
+			timerID = false;
+			canvas.width = canvas.width;
 			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 			c.fillStyle = 'red';
-			c.fillText('Ran out of Guesses', 10, 110);
+			c.fillText("Time is Up!", 35, 110);
+
 			// remove the alphabet pad
 			letters.innerHTML = '';
 			// display the correct answer
 			// need to use setTimeout to prevent race condition
+			clearInterval(timerID);
+			timerID = false;
 			setTimeout(showResult, 200);
-			clearInterval( timerID );
-	
+
 			// increase score of lost games
 			losses = losses + 1;
+		} else {
+			c.fillText("Time Remaining: " + remaining.toString(), 10, 220);
+
+
+			if (badGuesses == 0) {
+				c.drawImage(combined, 5, 0);
+			}
+
+			if (badGuesses == 1) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+				c.drawImage(Q1, 5, 0);
+				c.drawImage(Q2, 5, 0);
+				c.drawImage(V1, 5, 0);
+				c.drawImage(V2, 5, 0);
+				c.drawImage(O1, 5, 0);
+			}
+
+			if (badGuesses == 2) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+				c.drawImage(Q1, 5, 0);
+				c.drawImage(Q2, 5, 0);
+				c.drawImage(V1, 5, 0);
+				c.drawImage(V2, 5, 0);
+			}
+
+			if (badGuesses == 3) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+				c.drawImage(Q1, 5, 0);
+				c.drawImage(Q2, 5, 0);
+				c.drawImage(V1, 5, 0);
+			}
+
+			if (badGuesses == 4) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+				c.drawImage(Q1, 5, 0);
+				c.drawImage(Q2, 5, 0);
+			}
+
+			if (badGuesses == 5) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+				c.drawImage(Q1, 5, 0);
+			}
+
+			if (badGuesses == 6) {
+				c.drawImage(M, 5, 0);
+				c.drawImage(Y, 5, 0);
+			}
+
+			if (badGuesses == 7) {
+				c.drawImage(M, 5, 0);
+			}
+
+			if (badGuesses > 7) {
+				canvas.width = canvas.width;
+				c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+				c.fillStyle = 'red';
+				c.fillText('Ran out of Guesses', 10, 110);
+				// remove the alphabet pad
+				letters.innerHTML = '';
+				// display the correct answer
+				// need to use setTimeout to prevent race condition
+				setTimeout(showResult, 200);
+				clearInterval(timerID);
+				timerID = false;
+				// increase score of lost games
+				losses = losses + 1;
+			}
 		}
-	}
-	
-	// if the word has been guessed correctly, display message,
-	// update score of games won, and then show score after 2 seconds
-	if (correctGuesses == wordLength) {
-		letters.innerHTML = '';
-		clearInterval( timerID );
-		canvas.width = canvas.width;
-		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
-		c.fillStyle = 'red';
-		c.drawImage(M,5,0);
-		c.drawImage(Y,5,0);
-		c.drawImage(Q1,5,0);
-		c.drawImage(Q2,5,0);
-		c.drawImage(V1,5,0);
-		c.drawImage(V2,5,0);
-		c.drawImage(O1,5,0);
-		c.drawImage(O2,5,0);
-		c.fillText('You Won!', 65, 220);
-        // increase score of won games
-        // display score
-		wins = wins + 1;
+
+		// if the word has been guessed correctly, display message,
+		// update score of games won, and then show score after 2 seconds
+		if (correctGuesses == wordLength) {
+			letters.innerHTML = '';
+			clearInterval(timerID);
+			timerID = false;
+			canvas.width = canvas.width;
+			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+			c.fillStyle = 'red';
+			c.drawImage(M, 5, 0);
+			c.drawImage(Y, 5, 0);
+			c.drawImage(Q1, 5, 0);
+			c.drawImage(Q2, 5, 0);
+			c.drawImage(V1, 5, 0);
+			c.drawImage(V2, 5, 0);
+			c.drawImage(O1, 5, 0);
+			c.drawImage(O2, 5, 0);
+			c.fillText('You Won!', 65, 220);
+			// increase score of won games
+			// display score
+			wins = wins + 1;
+		}
 	}
 }
 
@@ -292,16 +345,20 @@ function showResult() {
 
 // Reset stored scores to zero
 function endGame() {
-	if(timerID != null){
-		clearInterval( timerID );
-	}
+	clearInterval( timerID );
+	timerID = false;
+	$('#play').css('display', 'inline-block').show().click(difficulty);
+	$('#end_game').css('display', 'inline-block').hide();
+	$('#help').css('display','inline-block').click(function(e) {
+		helptext.show().css('margin-left', (w-400)/2 + 'px');
+	});
 	showScore();
 }
 
 // Select random word to guess
 function getWord() {
- var blanks = new Array('myqvo','alex','to','gerald');
-  var sentences = new Array('This is for _','_ made this', 'Play _ Win','_');  
+ var blanks = ['myqvo','alex','to','gerald'];
+  var sentences = ['This is for _','_ made this', 'Play _ Win','_'];
   var index = parseInt(Math.random()* blanks.length);
-  return new Array(sentences[index],blanks[index]);
+  return [sentences[index],blanks[index]];
 }

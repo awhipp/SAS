@@ -11,6 +11,7 @@ h1 {
 	font-family: script;
 	color:#0077CC;
 }
+/*
 .js #help {
     width: 40px;
     height: 40px;
@@ -22,6 +23,7 @@ h1 {
     background-repeat: no-repeat;
     cursor: pointer;
 }
+*/
 .js #helptext {
     display: none;
     border: #CCC solid 10px;
@@ -68,7 +70,14 @@ h1 {
 	color: #f00;
 	text-align: center;
 }
-#play, #end_game {
+
+#button_canvas_margin {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#play, #end_game, #help, #beginner, #intermediate, #difficult, #expert {
 	display: none;
 	width: 120px;
 	padding: 0.25em 0;
@@ -88,6 +97,13 @@ h1 {
 	letter-spacing: 0.25em;
 	margin: 0.25em 0 0.4em 30px;
 }
+
+#letters_margin div{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
 #letters div {
 	width: 40px;
 	margin: 0 5px 5px 0;

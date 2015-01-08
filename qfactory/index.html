@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
-<html class="no-js" manifest="hangman.appcache">
+<html class="no-js">
 <head>
 <meta charset="utf-8">
-<title>Hangman</title>
+<title>The Q Factory</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="styles/hangman.css" rel="stylesheet" type="text/css">
+<link href="styles/qfactory.css" rel="stylesheet" type="text/css">
 <!--[if lte IE 8]>
     <script src="scripts/excanvas.js"></script>
 <![endif]-->
-<script src="scripts/modernizr.hangman.js"></script>
+<script src="scripts/modernizr.qfactory.js"></script>
 <script>
 Modernizr.load([{
 	test: Modernizr.canvastext,
@@ -17,7 +17,7 @@ Modernizr.load([{
 {
 	test: Modernizr.localstorage,
 	nope: ['scripts/json2.js', 'scripts/storage_polyfill.js'],
-	both: ['scripts/jquery-1.7.min.js', 'scripts/hangman.js'],
+	both: ['scripts/jquery-1.7.min.js', 'scripts/qfactory.js'],
 	complete: function() {
 		init();
 	}
@@ -28,22 +28,24 @@ Modernizr.load([{
 <body>
 <h1>The Q Factory</h1>
 <p id="warning">JavaScript must be enabled to play this game.</p>
-<div id="help"></div>
+
 <div id="helptext">
     <h2>What is this?</h2>
     <div id="close"></div>
     <p>Q Factory is a game to help you earn scholarship points. Correctly solve the quotes by filling in letters and you will be rewarded.</p>
 </div>
 <p id="loading">Game loading. . .</p>
-<center><hr><div id="play">New Game</div> <div id="end_game">End Game</div></center><hr><br><br>
-<center>
-  <canvas id="stage" width="200" height="225">Sorry, your browser needs to support HTML5 and Canvas for Q Factory.</canvas>
-</center>
-<center>
-<p id="word"></p>
-</center>
-<center>
-<div id="letters"></div>
-</center>
+<hr>
+<div id="button_canvas_margin">
+	<div id="play">New Game</div> <div id="end_game">End Game</div><div id="help">Help</div>
+	<div id="beginner">Beginner</div> <div id="intermediate">Intermediate</div><div id="difficult">Difficult</div><div id="expert">Expert</div>
+	<hr><br><br>
+	<canvas id="stage" width="200" height="225">Sorry, your browser needs to support HTML5 and Canvas for Q Factory.</canvas>
+	<p id="word"></p>
+</div>
+<div id='letters_margin'>
+	<div id="letters"></div>
+</div>
+
 </body>
 </html>
