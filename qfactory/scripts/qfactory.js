@@ -11,8 +11,12 @@ var canvas = document.getElementById('stage'),
 	start_time, timerID, timer, wins, losses;
 
 var combined, M, Y, Q1, Q2, V1, V2, O1, O2;
-function init() {
 
+var image_x, image_y;
+
+function init() {
+	image_x = 5;
+	image_y = 40;
 	combined = new Image();
 	combined.src = 'images/myqvo_combined.png';
 	M = new Image();
@@ -224,60 +228,60 @@ function drawCanvas() {
 			// increase score of lost games
 			losses = losses + 1;
 		} else {
-			c.fillText("Time Remaining: " + remaining.toString(), 10, 220);
+			c.fillText("Time Remaining: " + remaining.toString(), 10, 15);
 
 
 			if (badGuesses == 0) {
-				c.drawImage(combined, 5, 0);
+				c.drawImage(combined, image_x, image_y);
 			}
 
 			if (badGuesses == 1) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
-				c.drawImage(Q1, 5, 0);
-				c.drawImage(Q2, 5, 0);
-				c.drawImage(V1, 5, 0);
-				c.drawImage(V2, 5, 0);
-				c.drawImage(O1, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
+				c.drawImage(Q1, image_x, image_y);
+				c.drawImage(Q2, image_x, image_y);
+				c.drawImage(V1, image_x, image_y);
+				c.drawImage(V2, image_x, image_y);
+				c.drawImage(O1, image_x, image_y);
 			}
 
 			if (badGuesses == 2) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
-				c.drawImage(Q1, 5, 0);
-				c.drawImage(Q2, 5, 0);
-				c.drawImage(V1, 5, 0);
-				c.drawImage(V2, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
+				c.drawImage(Q1, image_x, image_y);
+				c.drawImage(Q2, image_x, image_y);
+				c.drawImage(V1, image_x, image_y);
+				c.drawImage(V2, image_x, image_y);
 			}
 
 			if (badGuesses == 3) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
-				c.drawImage(Q1, 5, 0);
-				c.drawImage(Q2, 5, 0);
-				c.drawImage(V1, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
+				c.drawImage(Q1, image_x, image_y);
+				c.drawImage(Q2, image_x, image_y);
+				c.drawImage(V1, image_x, image_y);
 			}
 
 			if (badGuesses == 4) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
-				c.drawImage(Q1, 5, 0);
-				c.drawImage(Q2, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
+				c.drawImage(Q1, image_x, image_y);
+				c.drawImage(Q2, image_x, image_y);
 			}
 
 			if (badGuesses == 5) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
-				c.drawImage(Q1, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
+				c.drawImage(Q1, image_x, image_y);
 			}
 
 			if (badGuesses == 6) {
-				c.drawImage(M, 5, 0);
-				c.drawImage(Y, 5, 0);
+				c.drawImage(M, image_x, image_y);
+				c.drawImage(Y, image_x, image_y);
 			}
 
 			if (badGuesses == 7) {
-				c.drawImage(M, 5, 0);
+				c.drawImage(M, image_x, image_y);
 			}
 
 			if (badGuesses > 7) {
@@ -306,15 +310,15 @@ function drawCanvas() {
 			canvas.width = canvas.width;
 			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 			c.fillStyle = 'red';
-			c.drawImage(M, 5, 0);
-			c.drawImage(Y, 5, 0);
-			c.drawImage(Q1, 5, 0);
-			c.drawImage(Q2, 5, 0);
-			c.drawImage(V1, 5, 0);
-			c.drawImage(V2, 5, 0);
-			c.drawImage(O1, 5, 0);
-			c.drawImage(O2, 5, 0);
-			c.fillText('You Won!', 65, 220);
+			c.drawImage(M, image_x, image_y);
+			c.drawImage(Y, image_x, image_y);
+			c.drawImage(Q1, image_x, image_y);
+			c.drawImage(Q2, image_x, image_y);
+			c.drawImage(V1, image_x, image_y);
+			c.drawImage(V2, image_x, image_y);
+			c.drawImage(O1, image_x, image_y);
+			c.drawImage(O2, image_x, image_y);
+			c.fillText('You Won!', 65, 15);
 			// increase score of won games
 			// display score
 			wins = wins + 1;
