@@ -11,7 +11,7 @@ var canvas = document.getElementById('stage'),
 	start_time, timerID, timer, wins, losses;
 
 var combined, M, Y, Q1, Q2, V1, V2, O1, O2;
-
+var loseText, loseTextOpen;
 var image_x, image_y;
 
 function init() {
@@ -53,6 +53,7 @@ function init() {
 		$('#mask').remove();
         helptext.hide();
     });
+	loseTextOpen = false;
 
 	// Rescale the canvas if the screen is wider than 700px
 	if (screen.innerWidth >= 700) {
@@ -65,8 +66,13 @@ function init() {
 }
 
 function difficulty(){
+	if(loseTextOpen){
+		loseText.hide();
+	}
+	showScore();
 	$('#play').hide();
 	$('#help').hide();
+	word.innerHTML = '';
 	$('#beginner').css('display','inline-block').show().click(function(e) {
 		timer = 26;
 		$('#beginner').hide();
@@ -215,8 +221,10 @@ function drawCanvas() {
 			canvas.width = canvas.width;
 			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 			c.fillStyle = 'red';
-			c.fillText("Time is Up!", 35, 110);
-
+			loseText = $('#loseTextTime');
+			var w = screen.availWidth <= 800 ? screen.availWidth : 800;
+			loseText.css('margin-left', (w-300)/2 + 'px').css('top', '250px').show();
+			loseTextOpen = true;
 			// remove the alphabet pad
 			letters.innerHTML = '';
 			// display the correct answer
@@ -252,7 +260,13 @@ function drawCanvas() {
 			c.drawImage(V2, image_x, image_y);
 			c.drawImage(O1, image_x, image_y);
 			c.drawImage(O2, image_x, image_y);
-			c.fillText('You Won!', 65, 15);
+			var winText = $('#winText');
+			var w = screen.availWidth <= 800 ? screen.availWidth : 800;
+			winText.css('margin-left', (w-300)/2 + 'px').css('top', '525px').show();
+			$('#winClose').click(function(e) {
+				$('#mask').remove();
+				winText.hide();
+			});
 			// increase score of won games
 			// display score
 			wins = wins + 1;
@@ -367,8 +381,11 @@ function MyQVO(badGuesses){
 		canvas.width = canvas.width;
 		c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
 		c.fillStyle = 'red';
-		c.fillText('Ran out of Guesses', 10, 110);
-		// remove the alphabet pad
+		loseText = $('#loseTextGuesses');
+		var w = screen.availWidth <= 800 ? screen.availWidth : 800;
+		loseText.css('margin-left', (w-300)/2 + 'px').css('top', '250px').show();
+		loseTextOpen = true;
+		// remove` the alphabet pad
 		letters.innerHTML = '';
 		// display the correct answer
 		// need to use setTimeout to prevent race condition

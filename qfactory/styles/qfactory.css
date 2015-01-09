@@ -41,18 +41,105 @@ h1 {
 #helptext p {
     margin-bottom: 0;
 }
+
 .js #close {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    top: -20px;
-    right: -20px;
-    z-index: 10;
-    background-image: url(../images/icons.png);
-    background-position: -48px 2px;
-    background-repeat: no-repeat;
-    cursor: pointer;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: -20px;
+	right: -20px;
+	z-index: 10;
+	background-image: url(../images/icons.png);
+	background-position: -48px 2px;
+	background-repeat: no-repeat;
+	cursor: pointer;
 }
+
+.js #winText {
+	display: none;
+	border: #CCC solid 10px;
+	border-radius: 8px;
+	width: 260px;
+	padding: 10px;
+	position: fixed;
+	background-color: #fff;
+	z-index: 10;
+}
+
+#winText h2 {
+	margin-top: 0;
+}
+#winText p {
+	margin-bottom: 0;
+}
+
+.js #winClose {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: -20px;
+	right: -20px;
+	z-index: 10;
+	cursor: pointer;
+}
+
+.js #loseTextTime {
+	display: none;
+	border: #CCC solid 10px;
+	border-radius: 8px;
+	width: 260px;
+	padding: 10px;
+	position: fixed;
+	background-color: #fff;
+	z-index: 10;
+}
+
+#loseTextTime h2 {
+	margin-top: 0;
+}
+#loseTextTime p {
+	margin-bottom: 0;
+}
+
+.js #loseCloseTime {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: -20px;
+	right: -20px;
+	z-index: 10;
+	cursor: pointer;
+}
+
+.js #loseTextGuesses {
+	display: none;
+	border: #CCC solid 10px;
+	border-radius: 8px;
+	width: 260px;
+	padding: 10px;
+	position: fixed;
+	background-color: #fff;
+	z-index: 10;
+}
+
+#loseTextGuesses h2 {
+	margin-top: 0;
+}
+#loseTextGuesses p {
+	margin-bottom: 0;
+}
+
+.js #loseCloseGuesses {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	top: -20px;
+	right: -20px;
+	z-index: 10;
+	cursor: pointer;
+}
+
+
 #mask {
     position: fixed;
     top: 0;
