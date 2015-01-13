@@ -8,13 +8,16 @@ var canvas = document.getElementById('stage'),
 	correctGuesses,
 	beginning_index,
 	ending_index,
-	start_time, timerID, timer, wins, losses;
+	start_time, timerID, timer, 
+	max_plays,
+	wins, losses;
 
 var combined, M, Y, Q1, Q2, V1, V2, O1, O2;
 var loseText, loseTextOpen;
 var image_x, image_y;
 
 function init() {
+	max_plays = 2;
 	image_x = 5;
 	image_y = 40;
 	combined = new Image();
@@ -44,11 +47,12 @@ function init() {
 	$('#end_game').hide();
 	$('#beginner').hide();
 	$('#intermediate').hide();
-	$('difficult').hide();
-	$('expert').hide();
+	$('#difficult').hide();
+	$('#expert').hide();
 	$('#help').css('display','inline-block').click(function(e) {
-        helptext.show().css('margin-left', (w-400)/2 + 'px');
+        helptext.show().css('margin-left', (w-425)/2 + 'px').css('margin-top', '50px');
     });
+	$('#back').css('display','inline-block');
 	$('#close').click(function(e) {
 		$('#mask').remove();
         helptext.hide();
@@ -66,10 +70,13 @@ function init() {
 }
 
 function difficulty(){
-	if(loseTextOpen){
+	var winText = $('#winText');
+	winText.hide();
+	if(loseTextOpen)
 		loseText.hide();
-	}
+
 	showScore();
+	$('#back').hide();
 	$('#play').hide();
 	$('#help').hide();
 	word.innerHTML = '';
@@ -119,11 +126,35 @@ function showScore() {
 	c.font = 'bold 24px Optimer, Arial, Helvetica, sans-serif';
     c.fillStyle = 'red';
 	c.textAlign = 'center';
-	c.fillText('YOUR SCORE', 100, 50);
+	c.fillText('YOUR SCORE', canvas.width/2, 50);
 	c.font = 'bold 18px Optimer, Arial, Helvetica, sans-serif';
 	c.fillStyle = 'grey';
-	c.fillText('Wins: ' + won, 100, 80);
-	c.fillText('Losses: ' + lost, 100, 110);
+	c.fillText('Wins: ' + won, canvas.width/2, 80);
+	c.fillText('Losses: ' + lost, canvas.width/2, 110);
+	word.innerHTML = '';
+	letters.innerHTML = '';
+}
+
+
+// Display the score in the canvas
+function showFinalScore() {
+	clearInterval(timerID);
+	timerID = false;
+	var won = wins,
+		lost = losses,
+		c = canvas.getContext('2d');
+	// clear the canvas
+	canvas.width = canvas.width;
+	c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+	c.fillStyle = 'grey';
+	c.textAlign = 'center';
+	c.fillText('Out of Turns Today', canvas.width/2, 20);
+	c.fillStyle = 'red';
+	c.fillText('FINAL SCORE', canvas.width/2, 50);
+	c.font = 'bold 18px Optimer, Arial, Helvetica, sans-serif';
+	c.fillStyle = 'grey';
+	c.fillText('Wins: ' + won, canvas.width/2, 80);
+	c.fillText('Losses: ' + lost, canvas.width/2, 110);
 	word.innerHTML = '';
 	letters.innerHTML = '';
 }
@@ -220,6 +251,7 @@ function drawCanvas() {
 			timerID = false;
 			canvas.width = canvas.width;
 			c.font = 'bold 20px Optimer, Arial, Helvetica, sans-serif';
+			c.textAlign = 'center';
 			c.fillStyle = 'red';
 			loseText = $('#loseTextTime');
 			var w = screen.availWidth <= 800 ? screen.availWidth : 800;
@@ -236,7 +268,9 @@ function drawCanvas() {
 			// increase score of lost games
 			losses = losses + 1;
 		} else {
-			c.fillText("Time Remaining: " + remaining.toString(), 10, 15);
+
+			c.textAlign = 'center';
+			c.fillText("Time Remaining: " + remaining.toString(), canvas.width/2, 15);
 
 			MyQVO(badGuesses);
 
@@ -263,10 +297,9 @@ function drawCanvas() {
 			var winText = $('#winText');
 			var w = screen.availWidth <= 800 ? screen.availWidth : 800;
 			winText.css('margin-left', (w-300)/2 + 'px').css('top', '525px').show();
-			$('#winClose').click(function(e) {
-				$('#mask').remove();
-				winText.hide();
-			});
+			$('#play').hide();
+			$('#end_game').css('display', 'inline-block').show();
+
 			// increase score of won games
 			// display score
 			wins = wins + 1;
@@ -283,6 +316,7 @@ function drawLine(context, from, to) {
 
 // When the game is over, display missing letters in red
 function showResult() {
+
 	var placeholders = word.innerHTML;
     placeholders = placeholders.split('');
 	var counter = 0;
@@ -293,17 +327,31 @@ function showResult() {
 		counter ++;
 	}
 	word.innerHTML = placeholders.join('');
-	$('#play').css('display', 'inline-block').show().click(difficulty);
-	$('#end_game').css('display', 'inline-block').hide();
+
+
 }
 
 // Reset stored scores to zero
 function endGame() {
 	clearInterval( timerID );
 	timerID = false;
-	$('#play').css('display', 'inline-block').show().click(difficulty);
-	$('#end_game').css('display', 'inline-block').hide();
-	showScore();
+	var winText = $('#winText');
+	winText.hide();
+	if(loseTextOpen)
+		loseText.hide();
+
+	if(wins + losses >= max_plays){
+		canvas.width = canvas.width;
+		$('#back').css('display', 'inline-block').show();
+		$('#end_game').css('display', 'inline-block').hide();
+		showFinalScore();
+	}else{
+		$('#play').css('display', 'inline-block').show().click(difficulty);
+		$('#back').css('display', 'inline-block').show();
+		$('#end_game').css('display', 'inline-block').hide();
+		showScore();
+	}
+
 }
 
 // Select random word to guess

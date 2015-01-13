@@ -164,9 +164,9 @@ h1 {
 	text-align: center;
 }
 
-#play, #end_game, #help, #beginner, #intermediate, #difficult, #expert {
+#play, #end_game, #help, #beginner, #intermediate, #difficult, #expert{
 	display: none;
-	width: 120px;
+	width: 160px;
 	padding: 0.25em 0;
 	text-align: center;
 	margin: 0.2em 0 0 13px;
@@ -175,6 +175,20 @@ h1 {
 	color: #fff;
 	background-color: #4E4E4E;
 }
+
+#back {
+	display: none;
+	width: 160px;
+	padding: 0.25em 0;
+	text-align: center;
+	margin: 0.2em 0 0 13px;
+	font-size: 112.5%;
+	cursor: pointer;
+	color: #fff;
+	background-color: #4E4E4E;
+	text-decoration: none
+}
+
 #stage {
 	/*float: right;*/
 }
