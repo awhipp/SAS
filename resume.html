@@ -20,8 +20,19 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
+
+<script>
+$(document).ready(function(){
+
+/*! Fades in whole page on load */
+$('body').css('display', 'none');
+$('body').fadeIn(1000);
+
+}); 
+</script>
+</head>
 <body>
 <div class="blog-masthead navbar-fixed-top" >
   <div class="container" id=">
@@ -38,7 +49,7 @@
         <ul id="myTab" class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#professional" id="professional-tab" role="tab" data-toggle="tab" aria-controls="professional" aria-expanded="true" data-ytta-id="-">Professional</a></li>
           <li role="presentation" class=""><a href="#projects" role="tab" id="projects-tab" data-toggle="tab" aria-controls="projects" data-ytta-id="-" aria-expanded="true">Projects</a></li>
-          <li role="presentation"><a href="index.html" id="academics-tab" aria-controls="academics">Back Home</a></li>
+          <li role="presentation" class=""><a href="index.html" role="tab" id="academics-tab" data-ytta-id="-" aria-expanded="true">Back Home</a></li>
         </ul>
         <div id="myTabContent" class="tab-content">
           <div role="tabpanel" class="tab-pane fade active in" id="professional" aria-labelledby="professional-tab"> <br>
