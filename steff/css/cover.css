@@ -6,6 +6,16 @@
 	margin-top: 15%;	
 }
 
+.cover-heading{
+	font-size: 300%;
+	font-family: 'Cabin';
+}
+
+.lead{
+	font-size: 200%;	
+	font-family: 'Archivo Narrow';
+}
+
 table.logo td {
     margin: 15px 15px 15px 15px;
     padding: 15px 15px 15px 15px;
@@ -24,7 +34,8 @@ table.logo {
 table.topnav td {
     margin: 15px 15px 15px 15px;
     padding: 15px 15px 15px 15px;
-	font-size: 120%;
+	font-size: 140%;
+	font-family: 'Archivo Narrow';
 }
 
 table.topnav {
@@ -37,20 +48,21 @@ table.topnav {
 }
 
 table.portfolio td {
-	width: 30%;
+	width: 25%;
 	font-size: 100%;
 	text-align: center;
 }
-tr.portfolio_row  > td
-{
+tr.portfolio_row  > td{
   padding-bottom: 4%;
 }
 
 table.portfolio {
-	margin-top: 5%;
+	margin: 5%;
+	margin-left: 5%;
+	margin-right: 5%;
     border-collapse: separate;
     border-spacing: 10px;
-	width: 100%;
+	width: 90.5%;
 }
 
 .portfolio-image{
@@ -72,7 +84,8 @@ table.portfolio {
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #000;
+  text-decoration: none;
 }
 
 /* Custom default button */
@@ -92,13 +105,13 @@ a:hover {
 html,
 body {
   height: 90%;
-  background-color: #333;
+  background-color: #FFF;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 body {
-  color: #fff;
+  color: #000;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
