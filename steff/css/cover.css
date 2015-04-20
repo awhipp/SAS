@@ -6,6 +6,32 @@
 	margin-top: 15%;	
 }
 
+.topnav{
+	margin-top: 1%;	
+	width:100%;
+	height: 15%;
+}
+
+.logo{
+	font-size: 250%;
+	font-family: 'Cabin';
+	text-align: left;
+	float: left;
+	width: 50%;
+	height: inherit;
+	margin-left: 10%;
+}
+
+.navigation{
+	font-size: 200%;
+	font-family: 'Archivo Narrow';
+	text-align: right;
+	float: right;
+	width: 50%;
+	height: inherit;
+	margin-right: 10%;
+}
+
 .cover-heading{
 	font-size: 300%;
 	font-family: 'Cabin';
@@ -16,64 +42,11 @@
 	font-family: 'Archivo Narrow';
 }
 
-table.logo td {
-    margin: 15px 15px 15px 15px;
-    padding: 15px 15px 15px 15px;
-	font-size: 250%;
-}
-
-table.logo {
-	float: left;
-	margin-left: 5%;
-	margin-top: 0%;
-    border-collapse: separate;
-    border-spacing: 10px;
-    *border-collapse: expression('separate', cellSpacing = '10px');
-}
-
-table.topnav td {
-    margin: 15px 15px 15px 15px;
-    padding: 15px 15px 15px 15px;
-	font-size: 140%;
-	font-family: 'Archivo Narrow';
-}
-
-table.topnav {
-	float: right;
-	margin-right: 5%;
-	margin-top: 1%;
-    border-collapse: separate;
-    border-spacing: 10px;
-    *border-collapse: expression('separate', cellSpacing = '10px');
-}
-
-table.portfolio td {
-	width: 25%;
-	font-size: 100%;
-	text-align: center;
-}
-tr.portfolio_row  > td{
-  padding-bottom: 4%;
-}
-
-table.portfolio {
-	margin: 5%;
-	margin-left: 5%;
-	margin-right: 5%;
-    border-collapse: separate;
-    border-spacing: 10px;
-	width: 90.5%;
-}
-
-.portfolio-image{
-	width: 90%;	
-}
-
 #aboutWrapper{
-	width: 50%;
 	margin-left: auto;
-	margin-right:auto;
-	text-align: left;
+	margin-right: auto;
+	padding-top: 5%;
+	width: 50%;
 }
 
 #aboutImage{
