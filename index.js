@@ -47,8 +47,7 @@ $( document ).ready(function() {
       }
 
       var myurl = "http://bingpowered.com";
-      var current = window.location;
-      if(myurl != current){
+      if(myurl != this.referrer){
         window.location = "http://bingpowered.com";
       }
 });
