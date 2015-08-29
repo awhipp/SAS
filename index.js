@@ -14,7 +14,6 @@ $( document ).ready(function() {
   $('#searchButton').on('click', function(){
     var link = $('#inputField').val();
     $('#inputField').blur();
-    //window.open('http://www.bing.com/search?q='+link,"_blank");
     $('#bingFrame').attr('src','http://www.bing.com/search?q='+link);
     $('#bingFrame').css('display','block');
     $('body').css('overflow-y', 'scroll');
@@ -45,5 +44,11 @@ $( document ).ready(function() {
 
       window.onresize = function() {
           resizeFunc();
+      }
+
+      var myurl = "http://bingpowered.com";
+      var current = window.location;
+      if(myurl != current){
+        window.location = "http://bingpowered.com";
       }
 });
