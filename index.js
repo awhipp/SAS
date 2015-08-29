@@ -46,8 +46,8 @@ $( document ).ready(function() {
           resizeFunc();
       }
 
-      var myurl = "http://bingpowered.com";
+      var myurl = "http://bingpowered.com/";
       if(myurl != this.referrer){
-        window.location = "http://bingpowered.com";
+        window.location = "http://bingpowered.com/";
       }
 });
