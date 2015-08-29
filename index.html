@@ -9,16 +9,39 @@
 
       body {
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: hidden;
         position: relative;
-        width: 90%;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
+        background-color: #4c74a8   ;
+        color: white;
       }
+
+      #right {
+        float: right;
+        width: 50%;
+        margin-bottom: 0.5%;
+        background-color: #4c74a8   ;
+      }
+
+
+      #left {
+        padding-top: 1%;
+        float: left;
+        width: 50%;
+        font-size: 150%;
+        margin-bottom: 0.5%;
+        font-weight: bolder;
+        background-color: #4c74a8   ;
+      }
+
 
       #wrapper {
         position: relative;
-        width: 100%;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
       }
 
       #bingFrame {
@@ -26,6 +49,7 @@
         width: 100%;
         height: 100%;
         display: none;
+        margin-bottom: 0%;
       }
 
       #inputField{
@@ -39,16 +63,6 @@
 
       }
 
-      #textField{
-        position: absolute;
-        color: white;
-        font-size: 110%;
-        font-weight: bolder;
-        top: 0;
-        margin-left: 0;
-      }
-
-
       #searchButton{
         cursor: hand;
         position: absolute;
@@ -56,7 +70,6 @@
         border: none;
         outline:none;
         top, margin-left, height, width: 0;
-
       }
       </style>
 
@@ -64,13 +77,15 @@
     </head>
 
     <body>
-      <a id="toBing" href="#" target="_blank" style="display: none;"></a>
+      <div id = "header">
+        <div id="left">
+        <center>The Real Bing Search Engine (RBSE)</center>
+        </div>
+        <div id="right">
+        <img src="info.gif"></img>
+        </div>
+      </div>
       <img id = "wrapper" src="bing.jpg">
-      <label id="textField">
-        Welcome to the Real Bing Search Engine (RBSE):<br><br>
-        1.) Type your question on my forehead<br><br>
-        2.) When finished boop his nose and be amazed
-      </label>
       <textarea id="inputField">
       </textarea>
       <button id="searchButton">

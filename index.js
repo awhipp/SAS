@@ -1,3 +1,15 @@
+function resizeFunc() {
+  $('#inputField').css('top', $('#wrapper').height()/2 -  $('#wrapper').height()/7);
+  $('#inputField').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/12);
+  $('#inputField').css('height', $('#wrapper').height()/9);
+  $('#inputField').css('width', $('#wrapper').width()/6);
+
+  $('#searchButton').css('top', $('#wrapper').height()/2 + $('#wrapper').height()/12);
+  $('#searchButton').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/40);
+  $('#searchButton').css('width', $('#wrapper').width()/15);
+  $('#searchButton').css('height', $('#wrapper').height()/5.5);
+}
+
 $( document ).ready(function() {
   $('#searchButton').on('click', function(){
     var link = $('#inputField').val();
@@ -5,6 +17,7 @@ $( document ).ready(function() {
     //window.open('http://www.bing.com/search?q='+link,"_blank");
     $('#bingFrame').attr('src','http://www.bing.com/search?q='+link);
     $('#bingFrame').css('display','block');
+    $('body').css('overflow-y', 'scroll');
     $('html,body').animate({
       scrollTop: $('#bingFrame').offset().top},
       'slow');
@@ -14,9 +27,9 @@ $( document ).ready(function() {
       if (e.which == 13) {
         var link = $('#inputField').val();
         $('#inputField').blur();
-        //window.open('http://www.bing.com/search?q='+link,"_blank");
         $('#bingFrame').attr('src','http://www.bing.com/search?q='+link);
         $('#bingFrame').css('display','block');
+        $('body').css('overflow-y', 'scroll');
         $('html,body').animate({
           scrollTop: $('#bingFrame').offset().top},
           'slow');
@@ -26,39 +39,11 @@ $( document ).ready(function() {
 
       $('#inputField').val("");
       setTimeout(function(){
-
-      $('#textField').css('top', $('#wrapper').height() - $('#wrapper').height()/3);
-      $('#textField').css('margin-left', $('#wrapper').width()/20);
-
-      $('#inputField').css('top', $('#wrapper').height()/3);
-      $('#inputField').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/7);
-      $('#inputField').css('height', $('#wrapper').height()/10);
-      $('#inputField').css('width', $('#wrapper').width()/6);
-
-      $('#searchButton').css('top', $('#wrapper').height()/2);
-      $('#searchButton').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/12);
-      $('#searchButton').css('width', $('#wrapper').width()/15);
-      $('#searchButton').css('height', $('#wrapper').height()/5.5);
-      
+        $(this).scrollTop(0);
+        resizeFunc();
       }, 100);
 
       window.onresize = function() {
-            $('#textField').css('top', $('#wrapper').height() - $('#wrapper').height()/3);
-            $('#textField').css('margin-left', $('#wrapper').width()/20);
-
-            $('#inputField').css('top', $('#wrapper').height()/3);
-            $('#inputField').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/7);
-            $('#inputField').css('height', $('#wrapper').height()/10);
-            $('#inputField').css('width', $('#wrapper').width()/6);
-
-            $('#searchButton').css('top', $('#wrapper').height()/2);
-            $('#searchButton').css('margin-left', $('#wrapper').width()/2 - $('#wrapper').width()/12);
-            $('#searchButton').css('width', $('#wrapper').width()/15);
-            $('#searchButton').css('height', $('#wrapper').height()/5.5);
+          resizeFunc();
       }
-
-      window.dispatchEvent(new Event('resize'));
-
-
-
-    });
+});
