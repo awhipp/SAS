@@ -45,9 +45,4 @@ $( document ).ready(function() {
       window.onresize = function() {
           resizeFunc();
       }
-
-      var myurl = "http://bingpowered.com/";
-      if(myurl != this.referrer){
-        window.location = "http://bingpowered.com/";
-      }
 });
